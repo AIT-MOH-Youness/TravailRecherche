@@ -1,0 +1,197 @@
+syntax = "proto3";
+
+option java_package = "ma.ensaj.reservation.grpc.stubs";
+option java_multiple_files = true;
+
+service ReservationService {
+  rpc CreateReservation (CreateReservationRequest) returns (CreateReservationResponse);
+  rpc GetReservation (GetReservationRequest) returns (GetReservationResponse);
+  rpc UpdateReservation (UpdateReservationRequest) returns (UpdateReservationResponse);
+  rpc DeleteReservation (DeleteReservationRequest) returns (DeleteReservationResponse);
+  rpc GetAllReservations (GetAllReservationsRequest) returns (GetAllReservationsResponse);
+}
+
+service ChambreService {
+  rpc CreateChambre (CreateChambreRequest) returns (CreateChambreResponse);
+  rpc GetChambre (GetChambreRequest) returns (GetChambreResponse);
+  rpc UpdateChambre (UpdateChambreRequest) returns (UpdateChambreResponse);
+  rpc DeleteChambre (DeleteChambreRequest) returns (DeleteChambreResponse);
+  rpc GetAllChambres (GetAllChambresRequest) returns (GetAllChambresResponse);
+}
+
+service ClientService {
+  rpc CreateClient (CreateClientRequest) returns (CreateClientResponse);
+  rpc GetClient (GetClientRequest) returns (GetClientResponse);
+  rpc UpdateClient (UpdateClientRequest) returns (UpdateClientResponse);
+  rpc DeleteClient (DeleteClientRequest) returns (DeleteClientResponse);
+  rpc GetAllClients (GetAllClientsRequest) returns (GetAllClientsResponse);
+}
+
+message Reservation {
+  int64 id = 1;
+  string dateDebut = 2;
+  string dateFin = 3;
+  Client client = 4;
+  Chambre chambres = 5;
+  string prefrences = 6;
+}
+
+message Client {
+  int64 id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string email = 4;
+  string telephone = 5;
+}
+
+message Chambre {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message CreateReservationRequest {
+  int64 clientId = 1;
+  string dateDebut = 2;
+  string dateFin = 3;
+  int64 chambreId = 4;
+  string prefernces = 5;
+}
+
+message CreateReservationResponse {
+  int64 id = 1;
+  string message = 2;
+}
+
+message GetReservationRequest {
+  int64 id = 1;
+}
+
+message GetReservationResponse {
+  Reservation reservation = 1;
+}
+
+message UpdateReservationRequest {
+  int64 id = 1;
+  int64 clientId = 2;
+  string dateDebut = 3;
+  string dateFin = 4;
+  int64 chambreId = 5;
+  string prefernces = 6;
+}
+
+message UpdateReservationResponse {
+  Reservation reservation = 1;
+}
+
+message DeleteReservationRequest {
+  int64 id = 1;
+}
+
+message DeleteReservationResponse {
+  string message = 1;
+}
+
+message GetAllReservationsRequest {
+}
+
+message GetAllReservationsResponse {
+  repeated Reservation reservations = 1;
+}
+
+message CreateChambreRequest {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message CreateChambreResponse {
+  int64 id = 1;
+  string message=2;
+}
+
+message GetChambreRequest {
+  int64 id = 1;
+}
+
+message GetChambreResponse {
+  Chambre chambre = 1;
+}
+
+message UpdateChambreRequest {
+  int64 id = 1;
+  string type = 2;
+  double prix = 3;
+  bool disponible = 4;
+}
+
+message UpdateChambreResponse {
+  Chambre chambre = 1;
+  string message=2;
+}
+
+message DeleteChambreRequest {
+  int64 id = 1;
+}
+
+message DeleteChambreResponse {
+  string message = 1;
+}
+
+message GetAllChambresRequest {
+}
+
+message GetAllChambresResponse {
+  repeated Chambre chambres = 1;
+}
+
+message CreateClientRequest {
+  int64 id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string email = 4;
+  string telephone = 5;
+}
+
+message CreateClientResponse {
+  int64 id = 1;
+  string message=2;
+}
+
+message GetClientRequest {
+  int64 id = 1;
+}
+
+message GetClientResponse {
+  Client client = 1;
+}
+
+message UpdateClientRequest {
+  int64 id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string email = 4;
+  string telephone = 5;
+}
+
+message UpdateClientResponse {
+  Client client = 1;
+  string message=2;
+}
+
+message DeleteClientRequest {
+  int64 id = 1;
+}
+
+message DeleteClientResponse {
+  string message = 1;
+}
+
+message GetAllClientsRequest {
+}
+
+message GetAllClientsResponse {
+  repeated Client clients = 1;
+}
